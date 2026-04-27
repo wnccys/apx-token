@@ -57,7 +57,7 @@ contract XtalNFT is ERC721, ERC721Votes, Ownable, ReentrancyGuard {
     /**
      * Used mainly by StakeContract in order to apply Stake bonuses
     */
-    function stakeMint(address to) public onlyStakingOrOwner returns (uint256, uint256) {
+    function stakeMint(address to) public onlyStakingOrOwner nonReentrant returns (uint256, uint256) {
         require(_nextTokenId + 1 < MAX_SUPPLY, "Supply exhausted.");
 
         uint256 tokenId1 = _nextTokenId++;
