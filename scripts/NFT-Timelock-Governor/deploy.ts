@@ -24,6 +24,10 @@ async function main() {
     console.log("Deployed Aphex Token");
 
     const xtal = await ethers.deployContract("XtalNFT", [deployerAddress, await apxToken.getAddress()]);
+    console.log("Deployed Xtal NFT");
+
+    const apxStake = await ethers.deployContract("AphexStake", [await apxToken.getAddress(), await xtal.getAddress()]);
+    console.log("Deployed Aphex Stake");
 
     const timelock = await ethers.deployContract("TimelockControl", [
         votingDelay,
@@ -48,6 +52,10 @@ async function main() {
     console.log("Granted Proposers");
     await timelock.grantRole(EXECUTOR_ROLE, "0x0000000000000000000000000000000000000000");
     console.log("Granted Executors");
+    
+    await xtal.setStakeContract(await apxStake.getAddress());
+    console.log("Set AphexStake as minter in XtalNFT");
+
     await xtal.transferOwnership(await timelock.getAddress());
     console.log("Set Timelock as owner of NFT");
 
@@ -66,7 +74,8 @@ async function main() {
 
         Xtal: ${await xtal.getAddress()}
         Timelock: ${await timelock.getAddress()},
-        Governor: ${await governor.getAddress()}
+        Governor: ${await governor.getAddress()},
+        AphexStake: ${await apxStake.getAddress()}
     `);
 
     console.log("Current balance: ", ethers.formatEther(await ethers.provider.getBalance(deployerAddress)));
@@ -87,15 +96,27 @@ async function main() {
 
         await tx.wait();
     }
-    console.log("=== All mints sent ===");
+    console.log("=== All standard mints sent ===");
 
-    await (await xtal.delegate(deployerAddress)).wait();
+    await (await xtal.delegate(deployerAddress, { nonce: nonce++ })).wait();
     console.log("Votes delegated");
 
-    const balance = await xtal.balanceOf(deployerAddress);
-    const votes = await xtal.getVotes(deployerAddress);
-    console.log("NFTs Owned: ", balance.toString());
-    console.log("Votes power: ", ethers.formatUnits(votes, 0));
+    let balance = await xtal.balanceOf(deployerAddress);
+    let votes = await xtal.getVotes(deployerAddress);
+    console.log("NFTs Owned (before stake): ", balance.toString());
+    console.log("Votes power (before stake): ", ethers.formatUnits(votes, 0));
+
+    // Demonstrate AphexStake
+    const stakeAmount = ethers.parseEther("50");
+    console.log(`\n=== Approving and Staking ${ethers.formatEther(stakeAmount)} APX... ===`);
+    await apxToken.approve(await apxStake.getAddress(), stakeAmount, { nonce: nonce++ }).then(tx => tx.wait());
+    await apxStake.lockAndMint({ nonce: nonce++ }).then(tx => tx.wait());
+    
+    balance = await xtal.balanceOf(deployerAddress);
+    votes = await xtal.getVotes(deployerAddress);
+    console.log("NFTs Owned (after stake): ", balance.toString());
+    console.log("Votes power (after stake): ", ethers.formatUnits(votes, 0));
+    console.log("=== Staking successful! Received 2 bonus NFTs ===\n");
 
     const xtalInterface = xtal.interface;
     const calldata = xtalInterface.encodeFunctionData("setMintPrice", [500n]);
