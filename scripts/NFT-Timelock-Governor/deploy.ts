@@ -52,7 +52,7 @@ async function main() {
     console.log("Granted Proposers");
     await timelock.grantRole(EXECUTOR_ROLE, "0x0000000000000000000000000000000000000000");
     console.log("Granted Executors");
-    
+
     await xtal.setStakeContract(await apxStake.getAddress());
     console.log("Set AphexStake as minter in XtalNFT");
 
@@ -84,7 +84,7 @@ async function main() {
 
     let mintPrice = await xtal.mintPrice();
     const totalApxNeeded = mintPrice * 5n;
-    
+
     // Approve XtalNFT to spend APX tokens
     const approveTx = await apxToken.approve(await xtal.getAddress(), totalApxNeeded, { nonce: nonce++ });
     await approveTx.wait();
@@ -111,7 +111,7 @@ async function main() {
     console.log(`\n=== Approving and Staking ${ethers.formatEther(stakeAmount)} APX... ===`);
     await apxToken.approve(await apxStake.getAddress(), stakeAmount, { nonce: nonce++ }).then(tx => tx.wait());
     await apxStake.lockAndMint({ nonce: nonce++ }).then(tx => tx.wait());
-    
+
     balance = await xtal.balanceOf(deployerAddress);
     votes = await xtal.getVotes(deployerAddress);
     console.log("NFTs Owned (after stake): ", balance.toString());
