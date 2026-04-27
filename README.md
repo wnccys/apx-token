@@ -39,6 +39,7 @@ Test files were made using the 3 requested tools.
 
 ### Hardhat Test Resume
 
+```txt
 Running Mocha tests
 
 
@@ -103,3 +104,5 @@ Saved html report to /home/wnccys/Progs/ETH/dao-nft-project/coverage/html
 ╟───────────────────────────────────────────────────┼────────┼─────────────┼─────────────────╢
 ║ Total                                             │ 86.49  │ 86.84       │                 ║
 ╚═══════════════════════════════════════════════════╧════════╧═════════════╧═════════════════╝
+
+```
