@@ -1,18 +1,5 @@
 # NFT Stacking Governor
 
-## TODO
-
-- [x] Test ERC-20
-- [x] Implement ERC-20
-- [x] Test ERC-721
-- [x] Implement ERC-721
-- [] Test Stacking Contract
-- [] Implement Stacking Contract
-- [] Test Integration
-- [] Integrate ERC-20 with ERC-721 with Stacking
-- [] Implement Governance Contract
-- [] Deploy
-
 ## The Problem It Solves
 
 Essentially, this contract collections and interaction scripts (basically a lib),
@@ -26,6 +13,21 @@ The project must be run on a Linux environment.
 The architecture is simple: It uses a DAO governance as queue / audit mechanism for safely contracts execution.
 
 ![Architecture](./.github/images/architecture.svg)
+
+## Roadmap
+
+## TODO
+
+- [x] Test ERC-20
+- [x] Implement ERC-20
+- [x] Test ERC-721
+- [x] Implement ERC-721
+- [ ] Test Stacking Contract
+- [ ] Implement Stacking Contract
+- [ ] Test Integration
+- [ ] Integrate ERC-20 with ERC-721 with Stacking
+- [ ] Implement Governance Contract
+- [ ] Deploy
 
 ## ERC Patterns Choice
 
