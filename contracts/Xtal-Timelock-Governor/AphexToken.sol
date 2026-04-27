@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 contract AphexToken is ERC20, Ownable, ReentrancyGuard {
     // Total supply bucket - 18 decimals
     uint256 public constant INITIAL_SUPPLY = 10000 * 1e18;
-    uint128 public usdPrice = 30;
+    uint128 public constant usdPrice = 30;
     AggregatorV3Interface internal immutable priceFeed;
 
     event Refund(address indexed to, uint256 amount);
