@@ -29,7 +29,11 @@ contract AphexToken is ERC20, Ownable, ReentrancyGuard {
      * Returns required amount of ETH at a moment in time, in wei.
      */
     function getRequiredETH() public view returns (uint256) {
-        (,int256 price,,,) = priceFeed.latestRoundData();
+        (uint80 roundID, int256 price, , uint256 updateTime, uint80 answeredInRound) = priceFeed.latestRoundData();
+        require(price > 0, "Invalid price");
+        require(updateTime != 0, "Incomplete round");
+        require(answeredInRound >= roundID, "Stale price");
+        
         uint256 ethPrice = uint256(price) * 1e10; // Price comes generally in amount * 10^8, so *10^10 = 10^18;
 
         return (usdPrice * 1e18 * 1e18 / ethPrice);
