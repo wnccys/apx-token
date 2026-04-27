@@ -8,6 +8,7 @@
     "compile": "npx hardhat compile",
     "build": "npx hardhat build",
     "slither": "npx hardhat clean && npx hardhat compile && python3 scripts/fix-artifacts.py && slither . --hardhat-ignore-compile --exclude-dependencies",
+    "myth": "./mythril.sh contracts/Xtal-Timelock-Governor/*.sol",
     "script": "npx hardhat run",
     "clear": "npx hardhat clean",
     "deploy": "npx hardhat ignition deploy --network localhost",
