@@ -16,8 +16,6 @@ The architecture is simple: It uses a DAO governance as queue / audit mechanism 
 
 ## Roadmap
 
-## TODO
-
 - [x] Test ERC-20
 - [x] Implement ERC-20
 - [x] Test ERC-721
