@@ -220,11 +220,11 @@ Saved html report to /home/wnccys/Progs/ETH/dao-nft-project/coverage/html
 The deploys were made on the Sepolia Testnet with the file in scripts/deploy-sepolia.ts.
 A valid private key must be set on hardhat.config.ts in networks if a new deploy is desired. (Balance will be used).
 
-XtalNFT: 0x52435Fa332FdACC481B9169a8A6051808Fa216a1
-AphexToken: 0xeD0AEDB0627734633b80E88F1aafbbb67B5c1c30
-AphexStake: 0x78148149A8A913a8A022765c75D0cEF1Cc0466AF
-TimelockController: 0x6619e8fc7A479de882A310f720Ed4DC91633b1A2
-XtalGovernor: 0x074C1b4232741861A17b483529fC52772b8203d3
+- **XtalNFT:** `0x52435Fa332FdACC481B9169a8A6051808Fa216a1`
+- **AphexToken:** `0xeD0AEDB0627734633b80E88F1aafbbb67B5c1c30`
+- **AphexStake:** `0x78148149A8A913a8A022765c75D0cEF1Cc0466AF`
+- **TimelockController:** `0x6619e8fc7A479de882A310f720Ed4DC91633b1A2`
+- **XtalGovernor:** `0x074C1b4232741861A17b483529fC52772b8203d3`
 
 These changes has been made in order to proper configure the environment (all of them present on the deploy-sepolia.ts file):
 
