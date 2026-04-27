@@ -29,7 +29,7 @@ The architecture is simple: It uses a DAO governance as queue/audit mechanism fo
 - [x] Integrate ERC-20 and ERC-721 with Staking
 - [x] Test Timelock/Governance
 - [x] Implement Timelock/Governance Contract
-- [ ] Deploy
+- [x] Deploy
 
 ## ERC Patterns Choice
 
@@ -86,6 +86,7 @@ The project includes several predefined scripts in `package.json` to simplify th
 - `npm run compile`: Compiles the smart contracts using Hardhat.
 - `npm run build`: Equivalent to compiling the smart contracts, generates the artifacts and TypeChain types.
 - `npm run slither`: Runs the Slither static analysis tool. It automatically handles Hardhat v3 artifact formatting using a custom Python script (`fix-artifacts.py`) before running Slither with dependencies excluded.
+- `npm run myth`: Runs the Mythril security analysis tool against the core smart contracts using the provided bash script.
 - `npm run script -- <path>`: Executes a specific Hardhat script (e.g., `npm run script -- scripts/NFT-Timelock-Governor/deploy.ts`).
 - `npm run clear`: Cleans the Hardhat cache and deletes compiled artifacts.
 - `npm run deploy`: Deploys the project modules using Hardhat Ignition to the `localhost` network.
@@ -134,7 +135,7 @@ INFO:Slither:. analyzed (67 contracts with 101 detectors), 6 result(s) found
 
 ### Mythril
 
-Mythril tests are huge, so it can be seen by running:
+Mythril tests are huge, so they can be seen by running:
 ```sh
 npm run myth
 ```
@@ -225,10 +226,14 @@ AphexStake: 0x78148149A8A913a8A022765c75D0cEF1Cc0466AF
 TimelockController: 0x6619e8fc7A479de882A310f720Ed4DC91633b1A2
 XtalGovernor: 0x074C1b4232741861A17b483529fC52772b8203d3
 
-These changes has been made in order to proper configure the environment:
+These changes has been made in order to proper configure the environment (all of them present on the deploy-sepolia.ts file):
 
-Setting AphexStake as an authorized minter in XtalNFT...
-Granting PROPOSER_ROLE to Governor...
-Granting EXECUTOR_ROLE to zero address (anyone can execute)...
-Transferring XtalNFT ownership to the TimelockController...
-Renouncing Timelock admin role from the deployer...
+* Setting AphexStake as an authorized minter in XtalNFT...
+
+* Granting PROPOSER_ROLE to Governor...
+
+* Granting EXECUTOR_ROLE to zero address (anyone can execute)...
+
+* Transferring XtalNFT ownership to the TimelockController...
+
+* Renouncing Timelock admin role from the deployer...
