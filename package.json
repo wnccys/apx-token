@@ -1,0 +1,37 @@
+{
+  "name": "dao-nft-project",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "build": "npx hardhat build",
+    "slither": "npx hardhat clean && npx hardhat compile && python3 scripts/fix-artifacts.py && slither . --hardhat-ignore-compile --exclude-dependencies",
+    "script": "npx hardhat run",
+    "clear": "npx hardhat clean",
+    "deploy": "npx hardhat ignition deploy --network localhost",
+    "fork": "anvil --fork-url https://eth-sepolia.g.alchemy.com/v2/1YmKZI8nx3tgI2lhGEFxw --no-storage-caching",
+    "test": "npx hardhat test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@chainlink/contracts": "^1.5.0",
+    "@nomicfoundation/hardhat-ethers": "^4.0.8",
+    "@nomicfoundation/hardhat-ignition": "^3.1.2",
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^3.0.4",
+    "@openzeppelin/contracts": "^5.6.1",
+    "@types/chai": "^5.2.3",
+    "@types/chai-as-promised": "^8.0.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.19.17",
+    "chai": "^6.2.2",
+    "ethers": "^6.16.0",
+    "forge-std": "github:foundry-rs/forge-std#v1.9.4",
+    "hardhat": "^3.4.0",
+    "mocha": "^11.7.5",
+    "typescript": "~5.8.0"
+  }
+}
